@@ -1,2 +1,7 @@
 __pycache__
 ~*
+*.csv
+node_modules
+*.xlsx
+target_asset
+sample_html

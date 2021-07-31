@@ -1,6 +1,12 @@
 import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+import time
+
+# from webdriver_manager.chrome import ChromeDriverManager
 
 def get_soup(url, driver_type='requests'):
     """
@@ -27,7 +33,15 @@ def get_soup(url, driver_type='requests'):
         return soup
     elif driver_type == 'selenium':
         driver = webdriver.Chrome()
+        # driver = webdriver.Chrome(ChromeDriverManager(version="91.0.4472.164").install())
+        # driver.implicitly_wait(10)
         driver.get(url)
+        
+        # delay = 10
+        # text_exist = EC.text_to_be_present_in_element((By.ID, "product_price"), 'U')
+        # text_exist = EC.presence_of_element_located((By.XPATH, "//span[@id='product_price' and ( contains(text(),'USD') or contains(text(),'On request') )]"))
+        # WebDriverWait(driver, delay).until(text_exist)
+        
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
         return soup
